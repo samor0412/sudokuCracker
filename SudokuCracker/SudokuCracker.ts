@@ -14,7 +14,9 @@ export class SudokuCracker {
     execute() {
         let prevEmpty = this.originalEmpty
         let currEmpty = prevEmpty
+        let counter = 0;
         do {
+            counter++;
             loopGrid({
                 loopGridCallback: ({ gridRowIndex, gridColumnIndex }) => {
                     checkRemainingNumber({ sudoku: this.sudoku, gridRowIndex, gridColumnIndex })
@@ -31,10 +33,10 @@ export class SudokuCracker {
             currEmpty = this.sudoku.getNumOfEmpty();
 
         } while (prevEmpty !== currEmpty)
-        this.report()
+        this.report(counter)
     }
 
-    report() {
+    report(counter: number) {
         const isResolved = this.sudoku.isCompleted() && this.sudoku.isCorrect();
         const result = isResolved ? 'Completed!' : "Can't be resolved"
         const finalEmpty = this.sudoku.getNumOfEmpty()
@@ -44,6 +46,7 @@ ${result}
 total empty: ${this.originalEmpty}
 resolved empty: ${this.originalEmpty - finalEmpty}
 complete percentage: ${Math.floor((this.originalEmpty - finalEmpty) / this.originalEmpty * 100)}%
+total iteration: ${counter}
         `)
     }
 }
