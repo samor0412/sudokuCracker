@@ -1,7 +1,8 @@
 {
   "scripts": {
     "dev": "ts-node ./main.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:level": "jest ./test/level.test.ts"
   },
   "devDependencies": {
     "@jest/globals": "^29.6.4",
