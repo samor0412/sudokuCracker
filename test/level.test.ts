@@ -8,9 +8,13 @@ const createTestCase = (level: string) => test(level, () => {
     // console.log(`question:\n${sudoku.print()}`)
     sudokuCracker.execute();
 
-    const answerSodoku = Sudoku.getSudokuFromFile(`./test/answers/${level}.txt`)
-    // console.log(`resolved answer:\n${answerSodoku.print()}`)
-    expect(answerSodoku.print()).toBe(sudoku.print())
+    try {
+        const answerSodoku = Sudoku.getSudokuFromFile(`./test/answers/${level}.txt`)
+        expect(sudoku.print()).toBe(answerSodoku.print())
+    } catch(e) {
+        console.log(`unresolved answer:\n${sudoku.print()}`)
+        throw e
+    }
 })
 
 describe('SudokuCracker', () => {

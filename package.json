@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "ts-node ./main.ts",
-    "test": "jest",
+    "test": "jest --testPathIgnorePatterns=level.test.ts",
     "test:level": "jest ./test/level.test.ts"
   },
   "devDependencies": {
