@@ -18,7 +18,20 @@ const createTestCase = (level: string) => test(level, () => {
 })
 
 describe('SudokuCracker', () => {
+    // Easy
     createTestCase('easy/level1')
     createTestCase('easy/level2')
+
+    // Medium
     createTestCase('medium/level1')
+    createTestCase('medium/level2')
+
+    // Hard
+    createTestCase('hard/level1')
+    
+    // Very Hard
+    createTestCase('very_hard/level1')
+
+    // Expert
+    createTestCase('expert/level1')
 })
