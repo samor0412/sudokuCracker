@@ -12,7 +12,7 @@ const createTestCase = (level: string) => test(level, () => {
         const answerSodoku = Sudoku.getSudokuFromFile(`./test/answers/${level}.txt`)
         expect(sudoku.print()).toBe(answerSodoku.print())
     } catch(e) {
-        console.log(`unresolved answer:\n${sudoku.print()}`)
+        console.log(`unresolved answer:\n${sudoku.printVisualise()}`)
         throw e
     }
 })

@@ -94,6 +94,13 @@ export class Sudoku {
         return output
     }
 
+    printVisualise() {
+        const output = this.dimension.map(rows => {
+            return `|${rows.join('|')}|`
+        }).join('\n')
+        return output
+    }
+
     getNumOfEmpty() {
         let total = 0;
         for (let i = 0; i < this.dimension.length; ++i) {
