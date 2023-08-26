@@ -52,7 +52,7 @@ describe('Sudoku', () => {
 7,1,5,2,9,8,3,4,6
 6,4,3,1,7,5,2,9,8`)
     })
-    test.only('getCellAdjacent', () => {
+    test('getCellAdjacent', () => {
         const sudoku = new Sudoku(correctDimension)
         expect(sudoku.getCellAdjacent(4, 0)).toStrictEqual({
             rowAdjacentCells: [7, 6, 9, 8, 1, 5, 3, 2],
