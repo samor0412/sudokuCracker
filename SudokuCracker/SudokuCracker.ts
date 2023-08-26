@@ -1,5 +1,5 @@
 import { Sudoku } from "../Sudoku";
-import { checkCellAdjacent } from "./strategy/byGrid/checkCallAdjacent";
+import { checkCellAdjacent, checkRemainingNumber } from "./strategy/byGrid";
 import { loopGrid } from "./utils/loopGrid";
 
 
@@ -12,19 +12,25 @@ export class SudokuCracker {
     }
 
     execute() {
-        let counter = 0
-        let originalEmpty = this.sudoku.getNumOfEmpty()
-        while (counter < 1000) {
-            // computation
-            loopGrid(({ rowIndex, columnIndex }) => {
-                checkCellAdjacent({ sudoku: this.sudoku, rowIndex, columnIndex })
+        let prevEmpty = this.originalEmpty
+        let currEmpty = prevEmpty
+        do {
+            loopGrid({
+                loopGridCallback: ({ gridRowIndex, gridColumnIndex }) => {
+                    checkRemainingNumber({ sudoku: this.sudoku, gridRowIndex, gridColumnIndex })
+                },
+                loopGridCellCallback: ({ rowIndex, columnIndex }) => {
+                    checkCellAdjacent({ sudoku: this.sudoku, rowIndex, columnIndex })
+                }
             })
 
             if (this.sudoku.isCompleted() && this.sudoku.isCorrect()) {
                 break;
             }
-            counter++;
-        }
+            prevEmpty = currEmpty;
+            currEmpty = this.sudoku.getNumOfEmpty();
+
+        } while (prevEmpty !== currEmpty)
         this.report()
     }
 
